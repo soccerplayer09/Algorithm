@@ -1,0 +1,21 @@
+def solution(genres, plays):
+    answer = []
+    from collections import defaultdict
+    gen_idx = defaultdict(list)
+    gen_sum = defaultdict(int)
+
+    for i,c in enumerate(genres):
+        gen_idx[c].append(i)
+        gen_sum[c] += plays[i]
+
+    l = list(gen_sum.items())
+    l = sorted(l, key = lambda x : -x[1])
+
+    for i in l:
+        l_tmp = list(gen_idx[i[0]])
+        l_tmp = sorted(l_tmp,key = lambda x : -plays[x])
+        answer.append(l_tmp[0])
+        if(len(l_tmp)>1):
+            answer.append(l_tmp[1])
+
+    return answer
